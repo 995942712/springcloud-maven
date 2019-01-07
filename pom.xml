@@ -11,7 +11,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>springcloud</name>
-    <description>springcloud</description>
+    <description>SpringCloud</description>
 
     <modules>
         <module>demo</module>

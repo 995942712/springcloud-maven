@@ -1,0 +1,29 @@
+# eureka服务注册中心配置
+# 配置服务应用名称
+spring:
+  application:
+    name: eureka-server
+
+# 配置服务端口
+server:
+  port: 8761
+
+# 单个节点服务注册中心
+eureka:
+  instance:
+    # 上报ip,使注册中心的其它服务地址正确
+    hostname: localhost
+    # 显示IP地址
+    prefer-ip-address: true
+  client:
+    # 是否要在服务中心注册自己
+    register-with-eureka: false
+    # 是否从eureka服务端获取注册信息
+    fetch-registry: false
+    # 指定服务注册中心地址
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+
+
+
