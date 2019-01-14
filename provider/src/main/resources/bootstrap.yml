@@ -1,0 +1,9 @@
+# provider 配置
+# 配置服务应用名称
+spring:
+  application:
+    name: provider
+
+
+
+

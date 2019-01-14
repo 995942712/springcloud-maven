@@ -6,11 +6,11 @@
         <groupId>com.ming</groupId>
         <version>1.0</version>
     </parent>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>ribbon</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>EurekaServer</description>
+    <description>Ribbon</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,26 +19,20 @@
     </properties>
 
     <dependencies>
-        <!--服务注册-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
         <!--配置中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-        <!--权限控制-->
+        <!--服务发现-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--授权-->
+        <!--客户端负载均衡-->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-            <version>2.3.2.RELEASE</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
     </dependencies>
 

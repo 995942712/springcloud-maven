@@ -8,14 +8,35 @@
     </parent>
     <groupId>com.ming</groupId>
     <artifactId>springcloud</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
-    <name>springcloud</name>
+    <name>${project.artifactId}</name>
     <description>SpringCloud</description>
 
     <modules>
-        <module>demo</module>
+        <module>config-server</module>
+        <!--eureka服务注册中心:8761-->
         <module>eureka-server</module>
+
+        <module>auth-service</module>
+        <!--客户端负载均衡:8084-->
+        <module>ribbon</module>
+        <!--生产者:8083-->
+        <module>provider</module>
+        <!--消费者:8081-->
+        <module>consumer</module>
+        <!--Feign声明式调用服务-->
+        <module>feign</module>
+
+        <module>hystrix</module>
+
+        <module>turbine</module>
+
+        <module>zuul</module>
+
+        <module>zipkin</module>
+
+        <module>sleuth</module>
     </modules>
 
     <properties>
@@ -24,6 +45,25 @@
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
     </properties>
+
+    <dependencies>
+        <!--监控接口-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--web-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -38,6 +78,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -45,16 +86,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/libs-milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>
