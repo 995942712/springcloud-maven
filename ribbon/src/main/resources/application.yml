@@ -7,7 +7,7 @@ spring:
 
 # 配置服务端口
 server:
-  port: 8084
+  port: 8762
 
 # 多个节点高可用服务注册中心
 eureka:

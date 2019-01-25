@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
+        <version>2.0.8.RELEASE</version>
     </parent>
     <groupId>com.ming</groupId>
     <artifactId>springcloud</artifactId>
@@ -19,21 +19,22 @@
         <module>eureka-server</module>
 
         <module>auth-service</module>
-        <!--客户端负载均衡:8084-->
-        <module>ribbon</module>
         <!--生产者:8083-->
         <module>provider</module>
         <!--消费者:8081-->
         <module>consumer</module>
-        <!--Feign声明式调用服务-->
+        <!--客户端负载均衡:8762-->
+        <module>ribbon</module>
+        <!--Feign声明式调用服务:8763-->
         <module>feign</module>
-
+        <!--Hystrix断路器:8764-->
         <module>hystrix</module>
-
+        <!--聚合监控:8765-->
         <module>turbine</module>
-
+        <!--网关:8766-->
         <module>zuul</module>
-
+        <module>gateway</module>
+        <!--全链路追踪监控:9411-->
         <module>zipkin</module>
 
         <module>sleuth</module>
@@ -53,10 +54,10 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-web</artifactId>-->
+        <!--</dependency>-->
         <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

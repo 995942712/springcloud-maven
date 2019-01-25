@@ -7,7 +7,7 @@ spring:
 
 # 配置服务端口
 server:
-  port: 7111
+  port: 9411
 
 # 多个节点高可用服务注册中心
 eureka:
@@ -29,6 +29,11 @@ eureka:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
 
-
+# zipkin 启动报错无法访问的解决方法
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
 
 

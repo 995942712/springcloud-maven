@@ -7,7 +7,7 @@ spring:
 
 # 配置服务端口
 server:
-  port: 7111
+  port: 8766
 
 # 多个节点高可用服务注册中心
 eureka:
@@ -29,6 +29,16 @@ eureka:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
 
-
-
+zuul:
+  # 版本号
+#  prefix: /v1
+  routes:
+    consumerApi:
+      path: /consumer/**
+      serviceId: consumer
+    ribbonApi:
+      path: /ribbon/**
+      serviceId: ribbon
+  # 是否开启路由重试
+#  retryable: true
 

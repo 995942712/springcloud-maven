@@ -4,10 +4,13 @@ spring:
     user:
       name: admin
       password: 123456
+  # 允许通过注册与现有定义同名的定义来覆盖bean定义,重命名其中一个bean或启用覆盖
+  main:
+    allow-bean-definition-overriding: true
 
 # 配置服务端口
 server:
-  port: 7111
+  port: 8763
 
 # 多个节点高可用服务注册中心
 eureka:
@@ -29,6 +32,18 @@ eureka:
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
 
+# 开启断路器
+feign:
+  hystrix:
+    enabled: true
+
+# 解决查找不到actuator/hystrix.stream 解决办法
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /
 
 
 

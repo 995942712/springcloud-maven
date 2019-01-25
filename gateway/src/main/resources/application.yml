@@ -1,0 +1,99 @@
+# gateway 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # 开启服务发现路由规则
+          enabled: true
+          # 当注册中心为eureka时,设置为true表示开启用小写的serviceId进行基于服务路由的转发,若不配置,默认大写访问,否则会报404
+          lower-case-service-id: true
+      routes:
+        # 这个路由的唯一id,不定义的话为一个uuid
+      - id: consumer
+        # http请求为lb://前缀 + 服务id,ws请求为lb:ws://前缀 + 服务id,表示将请求负载到哪一个服务上
+        uri: lb://consumer
+        # 表示这个路由的请求匹配规则,只有符合这个规则的请求才会走这个路由,为一个数组,每个规则为并且的关系.
+        # 有After,Before,Between,Cookie,Header,Host,Method,Path,Query,RemoteAddr,
+        predicates:
+        # =左右不能有空格
+        # 通过时间匹配
+#        - After=2019-01-01T11:11:11+08:00[Asia/Shanghai] #之后
+#        - Before=2019-01-01T11:11:11+08:00[Asia/Shanghai] #之前
+#        - Between=2019-01-01T11:11:11+08:00[Asia/Shanghai], 2019-01-31T11:11:11+08:00[Asia/Shanghai] #某一个时间段范围内
+        # 通过 Cookie 匹配(一个是Cookie name,一个是正则表达式)
+#        - Cookie=ityouknow, kee.e
+        # 通过 Header 属性匹配(一个header中属性名称和一个正则表达式)
+#        - Header=X-Request-Id, \d+
+        # 通过 Host 匹配
+#        - Host=
+        # 通过 Method 匹配(POST,GET,PUT,DELETE)
+#        - Method=GET
+        # 通过 Path 匹配
+        - Path=/consumer/**
+        # 通过 Query 匹配(一个是属性名一个为属性值)
+#        - Query=key
+#        - Query=key, value
+        # 通过 RemoteAddr 请求ip地址进行匹配
+#        - RemoteAddr=127.0.0.1
+#        - RemoteAddr=127.0.0.1/33
+        # 通过 Weight 权重路由
+#        - Weight=provide, 90
+        # 请求转发前的filter,为一个数组.常用的有Hystrix断路由,RequestRateLimiter限流,StripPrefix截取请求url
+        filters:
+        # =左右不能有空格
+        - RewritePath=/consumer/(?<path>.*), /$\{path}
+        - StripPrefix=1
+        # redis限流过滤器
+#        - name: RequestRateLimiter
+#          args:
+#            redis-rate-limiter.replenishRate: 10
+#            redis-rate-limiter.burstCapacity: 20
+      - id: ribbon
+        uri: lb://ribbon
+        predicates:
+        - Path=/ribbon/**
+        filters:
+        - RewritePath=/ribbon/(?<path>.*), /$\{path}
+        - StripPrefix=1
+
+# 配置服务端口
+server:
+  port: 8766
+
+# 多个节点高可用服务注册中心
+eureka:
+  instance:
+    ip-address: localhost
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+    # 上报ip,使注册中心的其它服务地址正确
+    hostname: ${eureka.instance.ip-address}
+    # 显示IP地址
+    prefer-ip-address: true
+    # 服务刷新时间配置，每隔这个时间会主动心跳一次
+    lease-renewal-interval-in-seconds: 5
+    # 服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除
+    lease-expiration-duration-in-seconds: 10
+  client:
+    # 刷新服务列表缓存
+    registry-fetch-interval-seconds: 5
+    # 指定服务注册中心地址
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
+
+# Hystrix GatewayFilter Factory
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
+
+
+
