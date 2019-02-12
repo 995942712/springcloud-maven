@@ -1,0 +1,29 @@
+# feign 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+  # 允许通过注册与现有定义同名的定义来覆盖bean定义,重命名其中一个bean或启用覆盖
+  main:
+    allow-bean-definition-overriding: true
+
+# 配置服务端口
+server:
+  port: 8763
+
+# 开启断路器
+feign:
+  hystrix:
+    enabled: true
+
+# 解决查找不到actuator/hystrix.stream 解决办法
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /
+
+
+

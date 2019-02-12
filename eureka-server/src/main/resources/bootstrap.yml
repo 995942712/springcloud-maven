@@ -1,7 +1,17 @@
+# eureka 服务注册中心配置
 # 配置服务应用名称
 spring:
   application:
     name: eureka
+  cloud:
+    config:
+      # config服务端的配置文件前缀名
+      name: ${spring.application.name}
+      # config服务端的uri
+      uri: http://localhost:8769
+      username: admin
+      password: 123456
+#      fail-fast: true
 
 
 

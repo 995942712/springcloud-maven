@@ -1,0 +1,39 @@
+# turbine 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+# 配置服务端口
+server:
+  port: 8765
+
+# actuator 端口
+management:
+  endpoints:
+    web:
+      # 修改访问路径,2.0之前默认是/,2.0默认是/actuator
+      base-path: /
+      # 开放所有页面节点,默认只开启了health、info两个节点
+      exposure:
+        include: "*"
+
+#
+turbine:
+  # 需要监控的服务名
+  app-config: provider
+  aggregator:
+    # 需要监控的服务集群名
+    cluster-config: default
+  cluster-name-expression: new String("default")
+  combine-host: true
+  # key是clusterConfig集群的名字,value是hystrix监控的后缀
+  instanceUrlSuffix:
+    default: hystrix.stream
+
+
+
+
+
+

@@ -14,10 +14,11 @@
     <description>SpringCloud</description>
 
     <modules>
+        <!--配置中心:8769-->
         <module>config-server</module>
         <!--eureka服务注册中心:8761-->
         <module>eureka-server</module>
-
+        <!--认证授权服务:8788-->
         <module>auth-service</module>
         <!--生产者:8083-->
         <module>provider</module>
@@ -36,7 +37,6 @@
         <module>gateway</module>
         <!--全链路追踪监控:9411-->
         <module>zipkin</module>
-
         <module>sleuth</module>
     </modules>
 

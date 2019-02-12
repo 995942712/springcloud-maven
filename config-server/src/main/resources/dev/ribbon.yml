@@ -1,0 +1,19 @@
+# ribbon 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+# 配置服务端口
+server:
+  port: 8762
+
+
+
+
+
+
+
+
+

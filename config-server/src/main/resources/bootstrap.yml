@@ -1,4 +1,4 @@
-# Config分布式配置中心
+# Config 分布式配置中心
 # 配置服务应用名称
 spring:
   application:
@@ -39,6 +39,11 @@ eureka:
     # 指定服务注册中心地址
     serviceUrl:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/
+
+
+
+
+
 
 
 

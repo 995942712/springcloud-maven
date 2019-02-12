@@ -1,0 +1,19 @@
+# zipkin 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+# 配置服务端口
+server:
+  port: 9411
+
+# zipkin 启动报错无法访问的解决方法
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+

@@ -1,0 +1,19 @@
+# hystrix 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+# 配置服务端口
+server:
+  port: 8764
+
+# 解决查找不到actuator/hystrix.stream 解决办法
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /
+

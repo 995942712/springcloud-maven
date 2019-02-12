@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--项目名称-->
+    <property name="PROJECT_NAME" value="darren-micro-register"/>
+    <!--日志路径-->
+    <property name="LOG_HOME" value="D:/logs"/>
+    <!--控制台日志-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--红色(时间)高亮(日志级别(五个字符宽度))绿色(线程),蓝绿色(类信息和行信息)具体日志信息换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %green(%-5level) --- [%thread] %cyan([%logger{16}:%line]) : %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!--INFO日志-->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志路径-->
+        <file>${LOG_HOME}/${PROJECT_NAME}/info.out</file>
+        <encoder>
+            <!--日志格式-->
+            <pattern>%date [%-5level] [%thread] [%logger{16} : %line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--日志过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤级别-->
+            <level>INFO</level>
+            <!--匹配时:接受-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不匹配时:拒绝-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按天滚动-->
+            <fileNamePattern>${LOG_HOME}/${PROJECT_NAME}/info_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--历史日志保留时间(单位:天)-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+    <!--ERROR日志-->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志路径-->
+        <file>${LOG_HOME}/${PROJECT_NAME}/error.out</file>
+        <encoder>
+            <!--日志格式-->
+            <pattern>%date [%-5level] [%thread] [%logger{16} : %line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--日志过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤级别-->
+            <level>ERROR</level>
+            <!--匹配时:接受-->
+            <onMatch>ACCEPT</onMatch>
+            <!--不匹配时:拒绝-->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按天滚动-->
+            <fileNamePattern>${LOG_HOME}/${PROJECT_NAME}/error_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--历史日志保留时间(单位:天)-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+    <!--优先级:appender里filter的level(开启DENY的情况下)=>logger的level=>root的level-->
+    <logger name="com.micro.darren" level="DEBUG"/>
+    <!--开发-->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+    <!--生产-->
+    <springProfile name="prod">
+        <root level="INFO">
+            <appender-ref ref="INFO"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+
+</configuration>

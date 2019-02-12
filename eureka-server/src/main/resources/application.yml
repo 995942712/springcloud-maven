@@ -1,49 +1,49 @@
-# eureka服务注册中心配置
-# 配置服务应用名称
-spring:
-  security:
-    basic:
-      enabled: true
-    user:
-      name: admin
-      password: 123456
-  cloud:
-    config:
-      enabled: true
-
-# 配置服务端口
-server:
-  port: 8761
-
-# 服务注册
-eureka:
-  # 实例设置
-  instance:
-    ip-address: localhost
-    instance-id: ${eureka.instance.ip-address}:${server.port}
-    # 实例主机名称
-    hostname: ${eureka.instance.ip-address}
-    # 显示IP地址
-    prefer-ip-address: true
-  # 服务端设置
-  server:
-    # 关闭自我保护,将出现故障的服务快速剔除
-    enable-self-preservation: false
-    # 清理无效节点的时间间隔,缺省(1000*60)ms
-    eviction-interval-timer-in-ms: 5000
-    # 当获取不到对应实例时,需要等待的时间,缺省(1000*60*5)ms
-    wait-time-in-ms-when-sync-empty: 5000
-  # 客户端设置
-  client:
-    # 是否要在服务中心注册自己
-    register-with-eureka: false
-    # 是否从eureka服务端获取注册信息
-    fetch-registry: false
-    # 指定服务注册中心地址
-    serviceUrl:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.instance-id}/eureka/
-
-
-
-
-
+## eureka 服务注册中心配置
+## 配置服务应用名称
+#spring:
+#  security:
+#    basic:
+#      enabled: true
+#    user:
+#      name: admin
+#      password: 123456
+#  cloud:
+#    config:
+#      enabled: true
+#
+## 配置服务端口
+#server:
+#  port: 8761
+#
+## 服务注册
+#eureka:
+#  # 实例设置
+#  instance:
+#    ip-address: localhost
+#    instance-id: ${eureka.instance.ip-address}:${server.port}
+#    # 实例主机名称
+#    hostname: ${eureka.instance.ip-address}
+#    # 显示IP地址
+#    prefer-ip-address: true
+#  # 服务端设置
+#  server:
+#    # 关闭自我保护,将出现故障的服务快速剔除
+#    enable-self-preservation: false
+#    # 清理无效节点的时间间隔,缺省(1000*60)ms
+#    eviction-interval-timer-in-ms: 5000
+#    # 当获取不到对应实例时,需要等待的时间,缺省(1000*60*5)ms
+#    wait-time-in-ms-when-sync-empty: 5000
+#  # 客户端设置
+#  client:
+#    # 是否要在服务中心注册自己
+#    register-with-eureka: false
+#    # 是否从eureka服务端获取注册信息
+#    fetch-registry: false
+#    # 指定服务注册中心地址
+#    serviceUrl:
+#      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.instance-id}/eureka/
+#
+#
+#
+#
+#

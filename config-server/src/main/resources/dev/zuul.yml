@@ -1,0 +1,29 @@
+# zuul 配置
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+# 配置服务端口
+server:
+  port: 8766
+
+zuul:
+  # 版本号
+#  prefix: /v1
+  routes:
+    consumerApi:
+      path: /consumer/**
+      serviceId: consumer
+    ribbonApi:
+      path: /ribbon/**
+      serviceId: ribbon
+  # 是否开启路由重试
+#  retryable: true
+
+
+
+
+
+

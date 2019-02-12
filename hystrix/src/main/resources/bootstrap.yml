@@ -3,6 +3,16 @@
 spring:
   application:
     name: hystrix
+  cloud:
+    config:
+      name: ${spring.application.name}
+      uri: http://admin:123456@localhost:8769
+#      fail-fast: true
+
+
+
+
+
 
 
 
